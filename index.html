@@ -5,17 +5,16 @@
     <link rel="stylesheet" href="app/components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="app/components/bootstrap/dist/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="app/components/leaflet/dist/leaflet.css"/>
-    <link rel="stylesheet" href="dist/css/"/>
+    <link rel="stylesheet" href="dist/css/style.css"/>
 </head>
 <body>
 
 
-<div class="jumbotron">
+<div class="container-fluid">
     <div class="content">
         <h1>Test Leaflet</h1>
     </div>
-</div>
-<div class="container">
+
     <div id="map">
 
     </div>
@@ -24,12 +23,11 @@
 
 
 
-
-
 <script src="app/components/leaflet/dist/leaflet-src.js"></script>
 <script>
     var map = L.map('map');
-    map.setView([55.7422, 37.5719], 11);
+    map.setView([53.8895, 27.5330], 12);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 </script>
 </body>
 </html>
