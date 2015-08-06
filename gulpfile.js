@@ -33,7 +33,7 @@ var isProd = function() {
 
 
 gulp.task('sass', function() {
-    return gulp.src('./app/css/sass/*.sass')  // only compile the entry file
+    return gulp.src('./app/css/sass/style.sass')  // only compile the entry file
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -56,10 +56,7 @@ gulp.task('es6', function() {
 
 
 gulp.task('watch-sass', function() {
-    // watch styles
-    gulp.watch('./app/css/sass/**/*.sass', ['sass'], function(vinyl) {
-        console.log(vinyl);
-    });  // Watch all the .scss files, then run the less task
+    gulp.watch('./app/css/**/*.sass', ['sass']);
 });
 
 gulp.task('watch-es6', function() {

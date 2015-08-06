@@ -17,6 +17,10 @@
   "dependencies": {
     "leaflet": "~0.7.3",
     "normalize.css": "~3.0.3",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "leaflet.markercluster": "~0.4.0"
+  },
+  "devDependencies": {
+    "faker": "~0.0.2"
   }
 }

@@ -1,25 +1,45 @@
-var map = L.map('map');
+let tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="http://localhost/">localhost</a>'
+    }),
 
-map.setView([53.906473, 27.567035], 12);
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+    latLng = L.latLng(53.906473, 27.567035),
 
-map.on('click', function(e) {
-    onMapClick(e);
+    map = L.map('map', {
+        center: latLng,
+        zoom: 14,
+        layers: [tiles]
+    }),
+
+    markers = L.markerClusterGroup();
+
+let markerPoints = (function() {
+    let points = [],
+        numeric = faker.directive('numeric'),
+        fullName = faker.directive('fullName');
+
+    for (let i = 0; i < 10000; i++) {
+        points.push({
+            lat: numeric(52.906473, 55.906473),
+            lng: numeric(27.567035, 28.567035),
+            title: fullName()
+        })
+    }
+    return points;
+})();
+
+markerPoints.forEach(function(markerPoint) {
+    markers.addLayer(
+        L.marker(new L.LatLng(markerPoint['lat'], markerPoint['lng']), {
+            // options
+            title: markerPoint['title'],
+            draggable: true,
+            riseOnHover: true
+        }).bindPopup(markerPoint['title'])
+    );
+
 });
 
-function onMapClick(e) {
-    console.log(e);
-    L.marker([e.latlng.lat, e.latlng.lng]).addTo(map).bindPopup('test');
-}
+map.addLayer(markers);
 
-setTimeout(function() {
-    console.log('*** start it ***');
-
-    map.setView([39.61, -105.02], 11);
-
-    var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
-        denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
-        aurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
-        golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
-}, 2000);
 
